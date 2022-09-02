@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import Header from '../components/Header';
+import Header from "../components/Header";
+import Chart from "../components/Chart";
 
 const organizations = [
   "TESLA, INC.",
@@ -12,6 +14,8 @@ const organizations = [
 ];
 
 const Home = () => {
+  const [organization, setOrganization] = useState('');
+
   return (
     <Box
       sx={{
@@ -28,10 +32,18 @@ const Home = () => {
             id="company-combo"
             options={organizations}
             size="small"
+            value={organization}
+            onChange={(event, option) => {
+              setOrganization(option);
+            }}
             sx={{ width: 350 }}
-            renderInput={(params) => <TextField size="small" {...params} label="Company" />}
+            renderInput={(params) => (
+              <TextField size="small" {...params} label="Company" />
+            )}
           />
-          
+        </Box>
+        <Box sx={{ marginTop: 3 }}>
+          <Chart organization={organization} />
         </Box>
       </Container>
     </Box>
