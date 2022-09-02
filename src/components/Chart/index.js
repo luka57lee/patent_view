@@ -6,7 +6,7 @@ import { dateTimeToDateString } from "../../utils/date";
 import { getSeries, getCategories } from "../../utils/chart";
 
 const Chart = ({ organization }) => {
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
   const [series, setSeries] = useState([]);
 
   useEffect(() => {
@@ -87,6 +87,9 @@ const Chart = ({ organization }) => {
       opacity: 1,
     },
   };
+
+  console.log("categories", categories);
+  console.log("series.length", series);
 
   return (
     <div>

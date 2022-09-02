@@ -57,6 +57,8 @@ export const getSeries = (now, data) => {
       data,
     });
   }
+
+  return newSeries;
 };
 
 export const getCategories = (now) => {
@@ -71,5 +73,5 @@ export const getCategories = (now) => {
     const year = d.getFullYear() + ((d.getMonth() + 1) % 12 === 0 ? 1 : 0);
     d = new Date(year, month, 1);
   }
-  
+  return newCategory
 }
