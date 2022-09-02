@@ -18,22 +18,19 @@ const Chart = ({ organization }) => {
 
       axios
         .post("https://api.patentsview.org/patents/query", {
-          method: "POST",
-          data: {
-            q: {
-              _and: [
-                {
-                  _gte: {
-                    patent_date: dateTimeToDateString(firstDay),
-                  },
+          q: {
+            _and: [
+              {
+                _gte: {
+                  patent_date: dateTimeToDateString(firstDay),
                 },
-                { assignee_organization: organization },
-              ],
-            },
-            f: ["patent_number", "patent_date", "cpc_section_id"],
-            s: { patent_date: "asc" },
-            o: { page: 1, per_page: 10000000 },
+              },
+              { assignee_organization: organization },
+            ],
           },
+          f: ["patent_number", "patent_date", "cpc_section_id"],
+          s: { patent_date: "asc" },
+          o: { page: 1, per_page: 10000000 },
         })
         .then((res) => {
           if (res && res.data && res.data.data) {
@@ -87,9 +84,6 @@ const Chart = ({ organization }) => {
       opacity: 1,
     },
   };
-
-  console.log("categories", categories);
-  console.log("series.length", series);
 
   return (
     <div>
