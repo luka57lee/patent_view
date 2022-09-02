@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ApexChart from "react-apexcharts";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { dateTimeToDate } from "../../utils/date";
+import { dateTimeToDateString } from "../../utils/date";
 import { getSeries, getCategories } from "../../utils/chart";
 
 const Chart = ({ organization }) => {
@@ -24,7 +24,7 @@ const Chart = ({ organization }) => {
               _and: [
                 {
                   _gte: {
-                    patent_date: dateTimeToDate(firstDay),
+                    patent_date: dateTimeToDateString(firstDay),
                   },
                 },
                 { assignee_organization: organization },

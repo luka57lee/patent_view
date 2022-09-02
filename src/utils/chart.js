@@ -1,5 +1,4 @@
 export const getSeries = (now, data) => {
-  const lastDay = new Date(now.getFullYear(), now.getMonth(), 1);
   const firstDay = new Date(now.getFullYear() - 5, now.getMonth(), 1);
 
   const cpcs = [];
