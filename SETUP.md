@@ -24,5 +24,5 @@ You may also see any lint errors in the console.
 
 [Docker](https://docs.docker.com/get-docker/) Install.
 
-- starts the containers in the background and leaves them running : `docker-compose up -d`
+- starts the containers in the background and leaves them running : `docker-compose up`
 - Stops containers and removes containers, networks, volumes, and images : `docker-compose down`
