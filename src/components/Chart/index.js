@@ -33,7 +33,8 @@ const Chart = ({ organization }) => {
           o: { page: 1, per_page: 10000000 },
         })
         .then((res) => {
-          if (res && res.data && res.data.data) {
+          console.log("res", res);
+          if (res && res.data && res.data) {
             const newSeries = getSeries(now, res.data.data);
             setSeries(newSeries);
           }
@@ -84,6 +85,9 @@ const Chart = ({ organization }) => {
       opacity: 1,
     },
   };
+
+  console.log("categories===>", categories);
+  console.log("series===>", series);
 
   return (
     <div>
