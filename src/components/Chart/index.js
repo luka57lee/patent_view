@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import ApexChart from "react-apexcharts";
 import PropTypes from "prop-types";
-import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Typography } from "@mui/material";
-import { dateTimeToDateString } from "../../utils/date";
-import { getSeries, getCategories } from "../../utils/chart";
-
 import { styled } from "@mui/material/styles";
+import { getSeries, getCategories } from "../../utils/chart";
+import { getPatent } from "../../service";
 
 const Loader = styled("div")({
   position: "absolute",
@@ -27,31 +25,20 @@ const Chart = ({ organization }) => {
       const firstDay = new Date(now.getFullYear() - 5, now.getMonth(), 1);
       const newCategories = getCategories(now);
       setCategories(newCategories);
+      
       setLoading(true);
-      axios
-        .post("https://api.patentsview.org/patents/query", {
-          q: {
-            _and: [
-              {
-                _gte: {
-                  patent_date: dateTimeToDateString(firstDay),
-                },
-              },
-              { assignee_organization: organization },
-            ],
-          },
-          f: ["patent_number", "patent_date", "cpc_section_id"],
-          s: { patent_date: "asc" },
-          o: { page: 1, per_page: 10000000 },
-        })
-        .then((res) => {
-          if (res && res.data) {
-            const newSeries = getSeries(now, res.data);
+      getPatent(firstDay, organization)
+        .then((data) => {
+          if (data) {
+            const newSeries = getSeries(now, data);
             setSeries(newSeries);
+          } else {
+            setSeries([]);
           }
           setLoading(false);
         })
-        .catch((e) => {
+        .catch((err) => {
+          setSeries([]);
           setLoading(false);
         });
     }
