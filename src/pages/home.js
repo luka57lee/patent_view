@@ -40,7 +40,7 @@ const Home = () => {
             onChange={(event, option) => {
               setOrganization(option);
             }}
-            sx={{ width: 350 }}
+            sx={{ maxWidth: 350 }}
             renderInput={(params) => (
               <TextField size="small" {...params} label="Company" />
             )}
