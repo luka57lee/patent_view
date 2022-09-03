@@ -1,1 +1,1 @@
-# patent_view
+# Patents statistic view
