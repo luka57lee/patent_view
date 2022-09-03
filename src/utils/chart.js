@@ -1,7 +1,7 @@
 export const getSeries = (now, data) => {
   const firstDay = new Date(now.getFullYear() - 5, now.getMonth(), 1);
 
-  const cpcs = [];
+  const cpcs = ["A", "B", "C", "D", "E", "F", "G", "H", "R"]; // There are 9 CPCs including cpc_section_id isn't available
   const cpcFrequency = {};
 
   for (let patent of data.patents) {
@@ -13,7 +13,7 @@ export const getSeries = (now, data) => {
       month + 1 < 10 ? `0${month + 1}` : month + 1
     }-01`;
 
-    let cpcId = "REST";
+    let cpcId = "R";
     if (
       patent.cpcs &&
       patent.cpcs.length > 0 &&
@@ -22,17 +22,12 @@ export const getSeries = (now, data) => {
       cpcId = patent.cpcs[0].cpc_section_id;
     }
 
-    if (!cpcs.includes(cpcId) && cpcId !== "REST") {
-      cpcs.push(cpcId);
-    }
     if (cpcFrequency[dateKey] === undefined) cpcFrequency[dateKey] = {};
     if (cpcFrequency[dateKey][cpcId] === undefined) {
       cpcFrequency[dateKey][cpcId] = 0;
     }
     cpcFrequency[dateKey][cpcId]++;
   }
-
-  cpcs.push("REST");
 
   const newSeries = [];
   for (let cpc of cpcs) {
@@ -43,6 +38,7 @@ export const getSeries = (now, data) => {
       const dateKey = `${year}-${
         month + 1 < 10 ? `0${month + 1}` : month + 1
       }-01`;
+      
       data.push(
         cpcFrequency[dateKey] === undefined ||
           cpcFrequency[dateKey][cpc] === undefined
@@ -62,7 +58,6 @@ export const getSeries = (now, data) => {
 };
 
 export const getCategories = (now) => {
-
   const lastDay = new Date(now.getFullYear(), now.getMonth(), 1);
   const firstDay = new Date(now.getFullYear() - 5, now.getMonth(), 1);
 
@@ -73,5 +68,5 @@ export const getCategories = (now) => {
     const year = d.getFullYear() + ((d.getMonth() + 1) % 12 === 0 ? 1 : 0);
     d = new Date(year, month, 1);
   }
-  return newCategory
-}
+  return newCategory;
+};

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import { Typography } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import Header from "../components/Header";
 import Chart from "../components/Chart";
@@ -14,7 +15,7 @@ const organizations = [
 ];
 
 const Home = () => {
-  const [organization, setOrganization] = useState('');
+  const [organization, setOrganization] = useState("");
 
   return (
     <Box
@@ -27,6 +28,9 @@ const Home = () => {
       <Header />
       <Container maxWidth="xl" sx={{ margin: "24px auto" }}>
         <Box>
+          <Typography variant="h6" component="h6" sx={{ marginBottom: 1 }}>
+            Select a company to see statistic
+          </Typography>
           <Autocomplete
             disablePortal
             id="company-combo"
@@ -42,7 +46,7 @@ const Home = () => {
             )}
           />
         </Box>
-        <Box sx={{ marginTop: 3 }}>
+        <Box sx={{ marginTop: 3, height: 450 }}>
           <Chart organization={organization} />
         </Box>
       </Container>
