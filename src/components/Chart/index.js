@@ -134,7 +134,12 @@ const Chart = ({ organization }) => {
     <>
       {loading ? (
         <CircularProgress
-          sx={{ position: "absolute", left: "50%", top: "50%" }}
+          sx={{
+            position: "absolute",
+            left: "-20px",
+            marginTop: "50%",
+            marginLeft: "50%",
+          }}
         />
       ) : (
         <>
