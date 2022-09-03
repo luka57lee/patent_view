@@ -75,7 +75,7 @@ const Chart = ({ organization }) => {
       marker: false,
       x: {
         show: true,
-        format: "dd MMM yyyy",
+        format: "MMM yyyy",
         formatter: undefined,
       },
       y: {
