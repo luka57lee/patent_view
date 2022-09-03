@@ -7,6 +7,15 @@ import { Typography } from "@mui/material";
 import { dateTimeToDateString } from "../../utils/date";
 import { getSeries, getCategories } from "../../utils/chart";
 
+import { styled } from "@mui/material/styles";
+
+const Loader = styled("div")({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+});
+
 const Chart = ({ organization }) => {
   const [categories, setCategories] = useState([]);
   const [series, setSeries] = useState([]);
@@ -133,14 +142,9 @@ const Chart = ({ organization }) => {
   return (
     <>
       {loading ? (
-        <CircularProgress
-          sx={{
-            position: "absolute",
-            left: "-20px",
-            marginTop: "50%",
-            marginLeft: "50%",
-          }}
-        />
+        <Loader>
+          <CircularProgress />
+        </Loader>
       ) : (
         <>
           {categories.length > 0 && series.length > 0 ? (
